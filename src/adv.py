@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -21,7 +22,6 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -38,7 +38,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
+# Is
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +49,37 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+print('outside:', room["outside"].roomName, room["outside"].roomDesc)
+
+player1 = Player(name="John", room=room["outside"])
+
+choice = ""
+while choice != "q":
+    # print current room name
+    print("Current Room: ", player1.get_room())
+
+    # Prints the current description (the textwrap module might be useful here).
+    print("Room Description: ", player1.get_roomDesc())
+
+    # Waits for user input and decides what to do.
+    choice = input(
+        "Your options are: \nn: North\ns: South\ne: East\nw: West\nq: Quit\n")
+
+    if choice == "q":
+        print("Thanks for playing!")
+
+    try:
+        if(choice == "n" and player1.room.dir_exists(choice)):
+            player1.room = player1.room.n_to
+        elif (choice == "s" and player1.room.dir_exists(choice)):
+            player1.room = player1.room.n_to
+        elif(choice == "e" and player1.room.dir_exists(choice)):
+            player1.room = player1.room.n_to
+        elif(choice == "w" and player1.room.dir_exists(choice)):
+            player1.room = player1.room.n_to
+        else:
+            print("You can't go that way")
+    except ValueError:
+        print("Invalid Response")
